@@ -1,3 +1,17 @@
+# USER PROJECT SETUP SETTINGS
+src/config/application.env
+src/config/tokens.json
+src/config/fonts.json
+src/models
+services/vk_bot_server/config/schema.sql
+services/vk_bot_server/config/data.sql
+services/vk_bot_server/resourses/service.db
+services/vk_bot_server/config/application.env
+services/tg_bot_server/config/schema.sql
+services/tg_bot_server/config/data.sql
+services/tg_bot_server/resouses/service.db
+services/tg_bot_server/config/application.env
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
