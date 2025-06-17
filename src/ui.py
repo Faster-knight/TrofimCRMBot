@@ -2,10 +2,19 @@ from PyQt6.QtCore import QRect
 from PyQt6.QtGui import QIcon
 from PyQt6.QtWidgets import QWidget, QMainWindow
 
-from data import readEnvFile
-
 
 class BaseApplicationWidget(QWidget):
+    """
+    [RUSSIAN]
+    Данный класс является базовым классом элемента графического интерфейса
+    или компонента графического интерфейса в приложении. В основном он
+    используется для создания дочерних графических компонентов в качестве
+    родительского класса.
+
+    Класс создает внутри себя родительский класс QWidget и запускает
+    метод setupUI который настраивает графический компонент индивидуально
+    в классах наследниках.
+    """
     def __init__(self, parentWidget=None, *args, **kwargs):
         super().__init__(parent=parentWidget)
         self.setupUI()
@@ -15,6 +24,11 @@ class BaseApplicationWidget(QWidget):
 
 
 class MainApplicationWindow(QMainWindow):
+    """
+    [RUSSIAN]
+    Этот класс является классом корневого графического интерфейса в приложении.
+    Наследуется от QMainWindow класса. Нигде в других классах не используется.
+    """
     def __init__(
             self,
             geometry: QRect,
