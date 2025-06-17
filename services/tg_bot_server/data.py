@@ -1,6 +1,70 @@
-def readEnvFile(pathFile: str) -> dict:
-    pass
+from json import load, dumps
+
+def writeJsonObject(data: dict, pathFile: str, encoding_name: str = "utf-8") -> None:
+    """
+    [RUSSIAN]
+    Этот метод записывает данные в .json файл из объекта словаря который
+    передается в метод.
+    :param data: dict - данные для записи в файл.
+    :param pathFile: str - путь к целевому файлу в файловой системе.
+    :param encoding_name: str - название кодировки в которой должен находиться целевой файл в файловой системе.
+    :return: None
+    """
+    with open(pathFile, "w", encoding=encoding_name) as f:
+        dumps(fp=f, obj=data)
 
 
-def writeEnvFile(pathFile: str, data: dict) -> None:
-    pass
+def readJsonObject(pathFile: str, encoding_name: str = "utf-8") -> dict | list:
+    """
+    [RUSSIAN]
+    Этот метод получает данные из .json файла. Расположенном в файловой системе приложения.
+    :param pathFile: str - путь к целевому файлу в файловой системе.
+    :param encoding_name: str - название кодировки в которой должен находиться целевой файл в файловой системе.
+    :return: dict | list - данные из файла.
+    """
+    with open(pathFile, "r", encoding=encoding_name) as f:
+        data = load(f)
+    return data
+
+
+def writeEnvData(data: dict, pathFile: str, encoding_name: str = "utf-8") -> None:
+    """
+    [RUSSIAN]
+    Этот метод перезаписывает данные в .env файл полностью заново из данных
+    которые получены из объекта словаря переданного в метод.
+    :param data: dict - новые данные для записи в файл
+    :param pathFile: str - путь к целевому файлу в файловой системе
+    :param encoding_name: str - название кодировки в которой должен находится целевой файл
+    :return: None
+    """
+    __temp = str("")
+    for k, v in data:
+        __temp += f"{k}={v}\n"
+    with open(pathFile, "w", encoding=encoding_name) as f:
+        f.write(__temp)
+        del __temp
+        del k
+        del v
+
+
+def readEnvFile(pathFile: str, encoding_name: str = "utf-8") -> dict:
+    """
+    [RUSSIAN]
+    Этот метод парсит и получает данные из .env файла
+    возвращая объект словаря.
+    :param pathFile: str - путь к целевому файлу в файловой системе.
+    :param encoding_name: str - название кодировки в которой должен находится целевой файл.
+    :return: dict - данные полученные из файла.
+    """
+    with open(pathFile, "r", encoding=encoding_name) as f:
+        __temp = f.read()
+    __sp = __temp.split("\n")
+    del __temp
+    t = dict()
+    __temp = []
+    for line in __sp:
+        __temp = line.split("=")
+        t[__temp[0]] = __temp[1]
+    del __temp
+    del __sp
+    return t
